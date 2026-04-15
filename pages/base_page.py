@@ -17,21 +17,21 @@ class BasePage:
 
     def wait_for_element(self, locator, timeout=6):
         return WebDriverWait(self.driver, timeout).until(
-            EC.presence_of_element_located(locator)
+            EC.presence_of_element_located(locator)  # presence_of_element_located - элемент появился в DOM
         )
 
     def wait_for_clickable(self, locator, timeout=6):
         return WebDriverWait(self.driver, timeout).until(
-            EC.element_to_be_clickable(locator)
+            EC.element_to_be_clickable(locator)  # Кликабельный = элемент видим и не заблокирован
         )
 
     def wait_for_visible(self, locator, timeout=6):
         return WebDriverWait(self.driver, timeout).until(
-            EC.visibility_of_element_located(locator)
+            EC.visibility_of_element_located(locator)  # Видимый = отображается на странице (не скрыт через CSS)
         )
 
     def find(self, locator):
-        return self.driver.find_element(*locator)
+        return self.driver.find_element(*locator)  # Поиск без явного ожидания
 
     def find_all(self, locator):
-        return self.driver.find_elements(*locator)
+        return self.driver.find_elements(*locator)  # Поиск списка элементов

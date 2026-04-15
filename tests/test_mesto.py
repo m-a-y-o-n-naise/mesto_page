@@ -16,8 +16,9 @@ class TestMesto:
 
         # Авторизация перед каждым тестом
         self.login_page.open()
-        self.login_page.login("some_email", "some_password")
+        self.login_page.login("email", "password")
 
+    # проверка смены аватара
     def test_update_avatar(self):
         avatar_url = "https://code.s3.yandex.net/qa-automation-engineer/python/files/avatarSelenium.png"
 
@@ -25,13 +26,14 @@ class TestMesto:
         self.profile_page.update_avatar(avatar_url)
 
         style = self.profile_page.get_avatar_style()
-        assert avatar_url in style
+        assert avatar_url in style  # проверка обновления через атрибут style
 
+    # создание и удаление карточки
     def test_create_and_delete_card(self):
         new_title = f"Москва{random.randint(100, 999)}"
         image_url = "https://code.s3.yandex.net/qa-automation-engineer/python/files/photoSelenium.jpeg"
 
-        # Запоминаем title последней карточки
+        # Запоминаем title последней карточки для проверки после удаления
         title_before = self.card_page.get_last_card_title()
 
         # Создаем новую карточку

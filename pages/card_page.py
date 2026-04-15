@@ -3,13 +3,13 @@ from pages.base_page import BasePage
 
 
 class CardPage(BasePage):
-    PLACES_LIST = (By.CLASS_NAME, "places__list")
+    PLACES_LIST = (By.CLASS_NAME, "places__list")  # Локатор контейнера со списком всех карточек
     ADD_BUTTON = (By.CLASS_NAME, "profile__add-button")
-    CARD_TITLE = (By.XPATH, "//li[@class='places__item card']//h2[@class='card__title']")
     FIRST_CARD_TITLE = (By.XPATH, "//li[@class='places__item card']//h2[@class='card__title']")
     NAME_INPUT = (By.NAME, "name")
     LINK_INPUT = (By.NAME, "link")
     SAVE_CARD_BUTTON = (By.XPATH, ".//form[@name='new-card']/button[text()='Сохранить']")
+    # Локатор кнопки удаления первой карточки
     DELETE_BUTTON = (By.XPATH,
                      "//li[@class='places__item card'][1]/button[@class='card__delete-button card__delete-button_visible']")
     ALL_CARDS = (By.XPATH, "//li[@class='places__item card']")
@@ -43,6 +43,8 @@ class CardPage(BasePage):
         self.wait_for_clickable(self.DELETE_BUTTON).click()
         return self
 
+    # Ждем, пока появится карточка с определенным заголовком
+    # Используется после создания или удаления
     def wait_for_card_title(self, expected_title):
         self.wait_for_visible((By.XPATH, f"//h2[@class='card__title' and text()='{expected_title}']"))
         return self

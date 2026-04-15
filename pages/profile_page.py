@@ -13,10 +13,10 @@ class ProfilePage(BasePage):
 
     def update_avatar(self, avatar_url):
         avatar_input = self.wait_for_element(self.AVATAR_INPUT)
-        avatar_input.clear()
+        avatar_input.clear()  # очищаем поле (на случай если там что-то было)
         avatar_input.send_keys(avatar_url)
         self.find(self.SAVE_BUTTON).click()
         return self
 
     def get_avatar_style(self):
-        return self.find(self.PROFILE_IMAGE).get_attribute('style')
+        return self.find(self.PROFILE_IMAGE).get_attribute('style')  # для проверки обновления url аватара через атрибут style
